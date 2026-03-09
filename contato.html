@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Evandro Gerola</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+    <nav>
+  <ul class="nav-list">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="formacao.html">Formação</a></li>
+    <li><a href="portfolio.html">Portfólio</a></li>
+    <li><a href="contato.html">Contato</a></li>
+  </ul>
+</nav>
+</header>
+<section class="contact-section">
+    <h1 class="page-title">Entre em Contato</h1>
+    <form id="contactForm" class="contact-form">
+        <div class="input-group">
+            <input type="text" id="nome" required>
+            <label>Nome</label>
+            <span class="error"></span>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" required>
+            <label>Email</label>
+            <span class="error"></span>
+        </div>
+        <div class="input-group">
+            <textarea id="mensagem" rows="4" required></textarea>
+            <label> Deixe sua avaliação!</label>
+            <span class="error"></span>
+        </div>
+        <button type="submit" class="btn ripple">Enviar</button>
+        <div class="success-message"></div>
+    </form>   
+</section>
+    <script type="module">
+  // Importações do SDK
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // Configuração do FIREBASE (BANCO DE DADOS INTEGRADO)
+  const firebaseConfig = {
+  apiKey: "AIzaSyAp9c6_FwRMKVq5eJ0CfYAiygtT85DFYG8",
+  authDomain: "porfolioevandro.firebaseapp.com",
+  projectId: "porfolioevandro",
+  storageBucket: "porfolioevandro.firebasestorage.app",
+  messagingSenderId: "769690709796",
+  appId: "1:769690709796:web:4b1c344679a72c2824cdb1",
+  measurementId: "G-4N0K566K54"
+};
+
+  // Inicia o Firebase e o Banco de Dados
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Seleciona o formulário que foi criado
+  const form = document.getElementById("contactForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Pega os valores dos inputs
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const mensagem = document.getElementById("mensagem").value;
+    const successMsg = document.querySelector(".success-message");
+
+    try {
+      // Salva no Firebase na aba "Contatos"
+      const docRef = await addDoc(collection(db, "contatos"), {
+        nome: nome,
+        email: email,
+        mensagem: mensagem,
+        data_envio: new Date()
+      });
+      console.log("Documento escrito com ID: ", docRef.id);
+      successMsg.textContent = "Obrigado, Você é demais!!";
+      successMsg.style.color = "#00f2ff";
+      form.reset();
+
+      //Mensagem de erro
+    } catch (e) {
+      console.error("Erro ao adicionar documento: ", e);
+      successMsg.textContent = "Erro ao enviar. Tente novamente.";
+      successMsg.style.color = "red";
+    }
+  });
+</script>
+<script src="js/script.js"></script>
+</body>
+</html>

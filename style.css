@@ -1,0 +1,583 @@
+:root {
+    --primary-color: #00f2ff;
+    --secondary-color: #0066ff;
+    --bg-dark: #000000;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --text-main: #ffffff;
+    --text-dim: #a0a0a0;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+.tech-stack {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.tech-stack img {
+    width: 35px; /* Tamanho */
+    height: auto;
+    filter: grayscale(100%); /* Ficar cinzas por padrão */
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.tech-stack img:hover {
+    filter: grayscale(0%); /* Ganham cor ao passar o mouse */
+    opacity: 1;
+    transform: translateY(-5px); /* Leve pulo */
+    
+}
+.tech-stack {
+    display: flex;
+    gap: 25px;
+    margin: 30px auto 0 auto; /* Centraliza o bloco e dá margem no topo */
+    justify-content: center;   /* Centraliza os ícones horizontalmente */
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 80%;           /* Limita a largura para não ficar colado nas bordas */
+}
+
+.tech-stack img {
+    width: 100px;
+    height: 55px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.tech-stack img:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px var(--primary-color));
+}
+.hero-text h1 a.linkedin-link {
+    text-decoration: none;
+    color: inherit; /* Mantém a cor branca original do H1 */
+    transition: var(--transition);
+    position: relative;
+}
+
+.hero-text h1 a.linkedin-link:hover {
+    color: var(--primary-color); /* Muda para azul neon ao passar o mouse */
+    text-shadow: 0 0 10px var(--primary-color);
+}
+.page-title {
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 3.5rem;                  
+    font-weight: 900;                  
+    margin-bottom: 60px;
+    text-align: center;
+    text-transform: uppercase;          
+    letter-spacing: 5px;                
+    background: linear-gradient(to right, #fff, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3)); /* Um brilho sutil no título */
+}
+
+/* Ajuste para telas menores (celular) não cortar o título */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
+}
+.navbar {
+    position: fixed; /* Fixa o elemento na tela */
+    top: 0;
+    left: 0;         /* Garante que comece do canto esquerdo */
+    width: 100%;     /* Ocupa a largura toda */
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1001;   /* Valor alto para ficar acima de tudo */
+    transition: var(--transition);
+    background: rgba(10, 10, 11, 0.8); /* Fundo inicial semi-transparente */
+    backdrop-filter: blur(10px);       /* Efeito de vidro embaçado */
+}
+
+.navbar.scrolled {
+    padding: 12px 8%;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 1.50rem; 
+    font-weight: 700;    
+    transition: var(--transition);
+}
+
+.navbar a:hover, 
+.navbar a.active {
+    color: var(--primary-color) !important; /* Força a cor azul neon */
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.5); /* Opcional: um brilho suave */
+}
+
+/* Garante que o nav ocupe o espaço correto */
+/* Garante que o nav ocupe o espaço correto */
+.navbar nav {
+    display: flex;
+    justify-content: flex-start; /* Alinha à esquerda */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Espaço entre os links */
+}
+
+@media (max-width: 768px) {
+    body { overflow-x: hidden; }
+
+    .mobile-menu {
+        display: block; /* Garante que o hambúrguer apareça */
+        z-index: 1002;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100vw; /* Ocupa a tela toda para facilitar o clique */
+        height: 100vh;
+        background: rgba(10, 10, 11, 0.98); /* Fundo sólido para não confundir */
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateX(100%); /* Escondido à direita */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1001;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    /* Essa classe é ativada pelo seu JS */
+    .nav-list.active {
+        transform: translateX(0);
+    }
+
+    .navbar ul li a {
+        font-size: 2rem; /* Links maiores no mobile para o dedo acertar fácil */
+    }
+
+    /* Animação do X no botão hambúrguer */
+    .mobile-menu.toggle .line1 { transform: rotate(-45deg) translate(-8px, 8px); }
+    .mobile-menu.toggle .line2 { opacity: 0; }
+    .mobile-menu.toggle .line3 { transform: rotate(45deg) translate(-5px, -7px); }
+}
+
+    /* SEÇÕES GERAIS */
+section {
+    padding: 100px 10%;
+    min-height: 100vh;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-align: center;
+    background: linear-gradient(to right, #fff, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+  /* HERO (HOME)*/   
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.hero-img {
+    position: relative;
+}
+
+.hero-img img {
+    width: 300px; 
+    height: 300px;
+    object-fit: cover;
+    /* Forma circular fixa */
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    /* Brilho neon sutil ao redor */
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.3);
+    /* Animação suave de flutuação */
+    animation: floatSmooth 6s ease-in-out infinite; 
+}
+
+@keyframes morphing {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+}
+
+  /* SKILLS & PROGRESS */
+.skills { min-height: auto; }
+
+.skill { margin-bottom: 30px; }
+
+.skill span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.bar {
+    height: 6px;
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    border-radius: 10px;
+    width: 0; /* Animado pelo JS */
+    transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+    /*PORTFOLIO (GRID) */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--primary-color);
+}
+
+.project-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+
+  /* TIMELINE (FORMAÇÃO)*/
+ 
+.timeline-section {
+    padding: 150px 10% 100px; /* Aumentado o topo para 150px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+p{
+  font-size: 20px;  
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    /* Linha azul lateral única */
+    border-left: 3px solid #00f2ff;
+    padding: 0 0 20px 40px;
+}
+
+/* Forçar a remoção de qualquer configuração de linha central antiga */
+.timeline::before { display: none !important; }
+
+.timeline-item {
+    width: 100% !important; /* Ocupa a largura total da área disponível */
+    left: 0 !important;      /* Garante que não fique deslocado para a direita */
+    margin-bottom: 50px;
+    position: relative;
+    text-align: left !important;
+}
+
+/* Bolinha na linha do tempo */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -49.5px; 
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: #00f2ff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00f2ff;
+    z-index: 2;
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 1 !important;     /* Garante visibilidade imediata */
+    transform: none !important; /* Remove qualquer deslocamento estranho */
+}
+
+.timeline-content h3 { color: #00f2ff; margin-bottom: 8px; font-size: 1.4rem; }
+.timeline-content span { color: #aaa; font-weight: bold; font-size: 0.9rem; }
+.timeline-content p { margin-top: 10px; color: #eee; }
+
+/* RESET DE EMERGÊNCIA PARA O REVEAL */
+.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+  /* FORMULÁRIO DE CONTATO */
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.input-group input, .input-group textarea {
+    background: rgba(247, 244, 244, 0.986);
+    border:0px solid rgba(248, 245, 245, 0.1);
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 20px;
+    transition: var(--transition);
+}
+
+.input-group label {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+
+   /* UTILITÁRIOS E RESPONSIVIDADE */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s all ease-out;
+}
+.social.links {
+    text-align: center;
+
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .hero { flex-direction: column-reverse; text-align: center; }
+    .hero-text h1 { font-size: 2.5rem; }
+    .navbar ul { display: none; } 
+    .timeline { margin-left: 20px; }
+}
+/* Indicação que o item é clicável */
+.timeline-item.clickable {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.timeline-item.clickable:hover .timeline-content {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+    transform: scale(1.02);
+}
+/* Container que coloca texto e imagem lado a lado */
+.cert-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.cert-text {
+    flex: 1; /* Faz o texto ocupar o espaço disponível */
+}
+
+/* 1. Container flexível para alinhar lado a lado */
+.cert-container-simples {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    overflow: visible !important; /*permite que a imagem saia do bloco */
+}
+/* 2. Estilo da miniatura */
+.img-zoom {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+}
+/* . O efeito de expansão ao passar o mouse */
+.img-zoom:hover {
+    transform: scale(2.5); /* Aumenta 2.5x */
+    z-index: 1000; /* fica à frente de qualquer texto ou linha */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+/* 4. Ajuste para o telemóvel não bugar */
+@media (max-width: 999px) {
+    /* Esconde as 3 listras de vez */
+    .mobile-menu {
+        display: none !important;
+    }
+    /* Faz a barra de navegação permitir que os itens fiquem lado a lado */
+    .navbar nav {
+        justify-content: center;
+        padding: 10px 0;
+    }
+    /* Organiza os links em uma linha horizontal que cabe no celular */
+    .nav-list {
+        display: flex !important;
+        flex-direction: row !important; /* Lado a lado */
+        position: static !important; /* Volta para o topo da página */
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        transform: none !important; /* Sempre visível */
+        gap: 15px !important;
+        opacity: 1 !important;
+    }
+    .nav-list li {
+        margin: 0 !important;
+        opacity: 1 !important;
+    }
+    /* Diminui um pouco a letra para caber tudo em uma linha */
+    .nav-list a {
+        font-size: 0.9rem !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
+@media (max-width: 768px) {
+    /* Faz o container de certificado empilhar os itens verticalmente */
+    .cert-container-simples {
+        flex-direction: column; 
+        text-align: center;
+        gap: 15px;
+    }
+
+    /* Ajusta o texto para ser mais compacto */
+    .cert-text h3 {
+        font-size: 1.1rem; /* Diminui levemente o título */
+        margin-bottom: 5px;
+    }
+
+    .cert-text p {
+        font-size: 0.9rem; /* Texto menor para não ocupar muito espaço vertical */
+        line-height: 1.4;
+    }
+
+    /* Posiciona a imagem embaixo do texto e ajusta o zoom */
+    .cert-wrapper {
+        order: 2; /* Garante que a imagem fique por último */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-zoom {
+        width: 180px; /* Aumenta um pouco a miniatura no mobile para facilitar o toque */
+        transform: none !important; /* Desabilita o efeito de zoom 2.5x que pode bugar no celular */
+    }
+    
+    .img-zoom:active {
+        transform: scale(1.1); /* Um zoom bem leve apenas quando pressionado */
+    }
+
+    /* Reduz o recuo da timeline no mobile para ganhar espaço */
+    .timeline {
+        padding: 0 0 20px 25px;
+        margin-left: 10px;
+    }
+
+    .timeline-item::after {
+        left: -34.5px; /* Ajusta a bolinha para a nova posição da linha */
+    }
+}
+
+
+
+
+
+
+
